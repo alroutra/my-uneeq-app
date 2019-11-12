@@ -13,15 +13,6 @@ let req = {
 
 let res = {};
 
-/* Mock global logger */
-global = {
-    logger: {
-        error: () => {},
-        info: () => {},
-        debug: () => {}
-    }
-};
-
 beforeEach( () => {
     res = {
         sendCalledWith: null,
