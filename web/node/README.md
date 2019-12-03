@@ -13,6 +13,7 @@ This demo supports the following:
 #### Dependencies
 - Node version 8 or higher
 - NPM version 6 or higher
+- [Session token service](https://gitlab.com/uneeq-oss/examples/tree/master/token/node)
 
 #### Running Locally
 `npm install` to install dependencies from package.json.
