@@ -40,7 +40,7 @@ let getToken = async (req, res) => {
         // Log and return errors
         console.error(err);
         res.status(500);
-        res.send(err.message);
+        res.send(err);
 
     }
 
