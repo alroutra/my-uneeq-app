@@ -23,17 +23,10 @@ const UNEEQ_CONVERSATION_ID = '79ba1d74-3c1f-498e-867b-2b464ec965c1'; // example
 
 const msgDisplay = document.getElementById('msg');
 
+let uneeqInstance;
+
 document.getElementById('start-btn').addEventListener( 'click', startDigitalHuman);
 document.getElementById('end-btn').addEventListener( 'click', endSession);
-
-// Create an instance of Uneeq
-const uneeqInstance = new uneeqPackage.Uneeq({
-    url: UNEEQ_URL,
-    conversationId: UNEEQ_CONVERSATION_ID,
-    avatarVideoContainerElement: document.getElementById('digital-human-video-container'),
-    localVideoContainerElement: document.getElementById('local-video-container'),
-    messageHandler: (msg) => messageHandler(msg)
-});
 
 // Add push to talk key listeners
 function addPTTKeyListeners() {
@@ -115,6 +108,16 @@ function messageHandler(msg) {
 //
 // After a few seconds the digital human should be visible and ready for interaction
 function startDigitalHuman() {
+
+    // Create an instance of Uneeq
+    uneeqInstance = new uneeqPackage.Uneeq({
+        url: UNEEQ_URL,
+        conversationId: UNEEQ_CONVERSATION_ID,
+        avatarVideoContainerElement: document.getElementById('digital-human-video-container'),
+        localVideoContainerElement: document.getElementById('local-video-container'),
+        messageHandler: (msg) => messageHandler(msg),
+        sendLocalVideo: false
+    });
 
     // Once the user clicks to start a session, display loading message
     msgDisplay.innerHTML = 'Loading...';
