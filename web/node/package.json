@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run bundle-js | npm run run-server",
-    "run-server": "./node_modules/http-server/bin/http-server",
+    "start": "npm run bundle-js | http-server",
     "bundle-js": "watchify main.js -o bundle.js"
   },
   "author": "",
