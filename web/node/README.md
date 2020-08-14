@@ -16,13 +16,21 @@ This demo supports the following:
 - [Session token service](https://gitlab.com/uneeq-oss/examples/tree/master/token/node)
 
 #### Running Locally
-`npm install` to install dependencies from package.json.
-<br/>
-`npm start` to compile bundle.js and run a webserver. bundle.js is imported into index.html and includes the uneeq-js library. This will
-watch for changes to main.js and recompile bundle.js automatically (using watchify). The webserver will run on 127.0.0.1
-and serve index.html
-<br/>
 
+<b>Installing a webserver:</b>
+<br/>
+To run the web example you will need to serve index.html over a webserver. You can setup your own, or use the one 
+configured in the example. To use http-server configured in the example you will need to install it as a global node
+module first:<br/>
+`npm install --global http-server`
+
+<b>Installing dependencies:</b>
+<br/>
+To install dependencies from package.json:<br/>
+`npm install` 
+
+<b>Environment Variables:</b>
+main.js contains three environment variables:
 - `GET_TOKEN_URL` The customer built token service.
 - `UNEEQ_URL` The UneeQ server you will retrieve the token from.
 - `UNEEQ_WORKSPACE` The conversation workspace you want to generate a token for.
@@ -30,7 +38,14 @@ and serve index.html
 `UNEEQ_URL` & `UNEEQ_WORKSPACE` should match values used to generate token. Be sure to update these values before
 running the example app, this can be done in main.js
 
-Once compiled, open index.html in your web browser. Clicking the 'Start Digital Human' button will cause the page to
+<b>Running the application:</b>
+<br/>
+The following command will compile bundle.js and run the webserver. bundle.js is imported into index.html and includes the uneeq-js library. This will
+watch for changes to main.js and recompile bundle.js automatically (using watchify). The webserver will run on 127.0.0.1
+and serve index.html:<br/>
+`npm start`
+
+Once compiled, open localhost:8080 in your web browser. Clicking the 'Start Digital Human' button will cause the page to
 request a session token from your token service. Once a token is retrieved it will be used to start a digital human
 session. After a few seconds you will see the digital human on screen. You can press and hold the spacebar key to speak
 to the digital human.
