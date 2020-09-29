@@ -1,4 +1,3 @@
-// nodemon --exec "heroku local" --signal SIGTERM
 const http = require('http')
 const app = require('./app')
 const logger = require('./utils/logger')

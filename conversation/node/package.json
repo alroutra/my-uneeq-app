@@ -1,5 +1,5 @@
 {
-    "name": "uneeq-integration",
+    "name": "conversation-example",
     "version": "1.0.0",
     "description": "REST API to connect UneeQ digital human to selected conversation platforms",
     "main": "server.js",
