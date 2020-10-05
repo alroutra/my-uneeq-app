@@ -1,4 +1,4 @@
-# conversation-example
+# uneeq-integration
 
 This is an implementation of a REST API which performs three functions;
 
@@ -8,7 +8,7 @@ This is an implementation of a REST API which performs three functions;
 
 ### 1. Digital human conversation
 
-This application implements conversation platform integration with a UneeQ digital human (as documented at https://docs.uneeq.io/#/chatbot_integration?id=conversation-platform-integration-overview). The application can be configured to connect a UneeQ digital human to Dialogflow, Dialogflow CX, Watson, Lex, and Wolfram Alpha concurrently. The application creates five POST routes, with the paths configurable in the environment variables (see below) - if configured, this allows a single instance of this integration application to connect to any of the five platforms, by configuring the digital human to make requests to the associated route (using the 'Other Conversation Platform' options in UneeQ Creator).
+This application implements conversation platform integration with a UneeQ digital human (as documented at https://docs.uneeq.io/#/chatbot_integration?id=conversation-platform-integration-overview). The application can be configured to connect a UneeQ digital human to Dialogflow, Dialogflow CX, Watson, Lex, Wolfram Alpha, and Directline concurrently. The application creates six POST routes, with the paths configurable in the environment variables (see below) - if configured, this allows a single instance of this integration application to connect to any of the six platforms, by configuring the digital human to make requests to the associated route (using the 'Other Conversation Platform' options in UneeQ Creator).
 
 The application also implements the unsolicited response or 'speak' API (as documented at https://docs.uneeq.io/#/unsolicited_responses?id=unsolicited-responses-overview), which allows responses to be pushed to a digital human during a conversation without first being triggered by an end user input. This allows for both synchronous and asynchronous interactions between the end user and the digital human.
 
@@ -109,7 +109,7 @@ WATSON_CONFIG_ENDPOINTURI (the endpoint address for your Watson resource)
 #### If using Wolfram Alpha (optional)
 
 ```
-API_ROUTE_NLP_WOLFRAM (path for your Wolfram Alpha API, defaults to "/wolfram)
+API_ROUTE_NLP_WOLFRAM (path for your Wolfram Alpha API, defaults to "/wolfram")
 WOLFRAM_ENABLED (as above)
 WOLFRAM_CONFIG_APPID (an AppID issued by Wolfram to access the conversation API)
 WOLFRAM_CONFIG_APIBASEURL="http://api.wolframalpha.com" (the current default)
@@ -118,6 +118,16 @@ WOLFRAM_CONFIG_QUERYPARAM=i (the current default)
 WOLFRAM_CONFIG_SESSIONPARAM=conversationid (the current default)
 WOLFRAM_CONFIG_GREETING="Hi there. Ask me a question and I'll see what Wolfram Alpha has to say." (a friendly greeting - Wolfram is not built for chit-chat!)
 WOLFRAM_CONFIG_NOTFOUNDMSG="Sorry. It looks like Wolfram Alpha doesn't have an answer for that question. Try another one!" (as above)
+```
+
+#### If using Directline (optional)
+
+```
+API_ROUTE_NLP_DIRECTLINE (path for your Directline API, defaults to "/directline")
+DIRECTLINE_ENABLED (as above)
+DIRECTLINE_CONFIG_SECRET (from your bot exposed through the Directline channel, the API secret)
+DIRECTLINE_CONFIG_SCENARIO (required for Health Bot implementations - the scenario to be triggered on welcome)
+DIRECTLINE_CONFIG_LOCALE (the language locale)
 ```
 
 ---
@@ -142,7 +152,7 @@ API_ROUTE_SPEAK (path for your token request API, defaults to "/speak")
 SPEAK_ROUTE_ENABLED (true/false - will prevent the route from trying to call the API if you're not using the speak service)
 SPEAK_UNEEQ_URL (the URL for the UneeQ API as shown in your Developer dashboard in Creator - e.g. https://api.us.uneeq.io)
 SPEAK_UNEEQ_ROUTE=/api/v1/avatar/ (the route in the speak request documentation)
-SPEAK_UNEEQ_JWTSECRET (your JWT secret as shown in your Developer dashboard in Creator)
+SPEAK_UNEEQ_JWTSECRET (your JWT secret as shown in your Developer dashboard in Creator - for security this is used for signature verification on calls to your API, and to then encode the request before sending to UneeQ)
 ```
 
 ---

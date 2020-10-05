@@ -2,6 +2,7 @@ const express = require('express')
 const createError = require('http-errors')
 const helmet = require('helmet')
 const xss = require('xss-clean')
+const cors = require('cors')
 const loaders = require('./loaders')
 const logger = require('./utils/logger')
 
@@ -11,6 +12,7 @@ const app = express()
 app.use(helmet())
 app.use(xss())
 app.use(express.json({ limit: '10kb' }))
+app.use(cors())
 
 // Initialise paths and create routes
 loaders.initialiseRoutePaths()

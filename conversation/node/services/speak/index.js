@@ -23,9 +23,15 @@ let push = async (body) => {
              * the UneeQ specification for the speak API. 'answer' contains a string with the
              * dialog for the digital human to speak, 'answerAvatar' contains an instructions
              * payload that conforms to the specification for platform instructions, and
-             * 'sessionId' contains the ID for an in-progress conversation with a digital human
+             * 'sessionId' contains the encoded ID for an in-progress conversation with a digital human
              * (as contained in the avatarSessionId field in a properly formed request) */
-            let speakURL = uneeqSpeakURL + body.sessionId + '/speak'
+
+            let requestSessionId = jwt.verify(body.sessionId, uneeqJWTSecret)
+            if (!requestSessionId.hasOwnProperty('sessionId')) {
+                throw new error('Decoded sessionId payload did not contain a sessionId field')
+            }
+
+            let speakURL = uneeqSpeakURL + requestSessionId.sessionId + '/speak'
             let headers = { headers: { 'content-type': 'application/json' } }
 
             /* The answer and instructions are parsed using the same methods as for the NLP
@@ -37,7 +43,8 @@ let push = async (body) => {
                 instructions: await format.parseInstructions(JSON.stringify(answerAvatar.instructions)),
             }
 
-            let sessionId = { sessionId: body.sessionId }
+            let sessionId = { sessionId: requestSessionId.sessionId }
+
             let speakBody = {
                 answer: answer,
                 answerAvatar: JSON.stringify(instructions),

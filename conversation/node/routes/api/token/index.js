@@ -16,7 +16,7 @@ const methodNotAllowed = (req, res, next) => {
  * This is preferring that requests to routes that have not been enabled result in a 404 and not an application error
  * GET requests route to the controller, all other methods raise 405 error */
 if (utils.parseBoolean(process.env.TOKEN_ROUTE_ENABLED)) {
-    router.route('/').get(orchestration.processRequest).all(methodNotAllowed)
+    router.route('/').post(orchestration.processRequest).all(methodNotAllowed)
 }
 
 module.exports = router
