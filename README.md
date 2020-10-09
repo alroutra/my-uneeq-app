@@ -13,4 +13,5 @@ within this application and not exposed via an HTML front end application.
 - [Node JS](https://gitlab.com/uneeq-oss/examples/tree/master/token/node)
 
 ## Conversation Platform API
-Coming soon...
+This application implements conversation platform integration with a UneeQ digital human. The application can be configured to connect a UneeQ digital human to Dialogflow, Dialogflow CX, Watson, Lex, Wolfram Alpha, and Directline concurrently.
+- [Node JS](https://gitlab.com/uneeq-oss/examples/tree/master/conversation/node)
